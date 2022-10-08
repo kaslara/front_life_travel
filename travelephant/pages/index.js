@@ -23,7 +23,7 @@ export default function Home() {
       <br></br>
       <br></br>
         <div className="relative m-20">
-        <h1 className="text-purple-600 font-semibold px-3 py-2 text-3xl hover:font-black text-center">Plan your next trip</h1>
+        <h1 className="text-indigo-600 font-semibold px-3 py-2 text-3xl hover:font-black text-center">Plan your next trip</h1>
         <br></br>
         <Formik
                   initialValues={{

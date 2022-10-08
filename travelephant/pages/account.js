@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Navbar from '../components/Navbar'
 import styles from '../styles/Home.module.css'
 
-export default function About() {
+export default function Account() {
   return (
     <div className={styles.container}>
       <Head>
@@ -12,7 +12,7 @@ export default function About() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <h1>About</h1>
+      <h1>Account</h1>
       
 
       

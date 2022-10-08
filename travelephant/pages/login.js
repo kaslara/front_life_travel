@@ -1,9 +1,10 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import LoginForm from '../components/LoginForm'
 import Navbar from '../components/Navbar'
 import styles from '../styles/Home.module.css'
 
-export default function About() {
+export default function Login() {
   return (
     <div className={styles.container}>
       <Head>
@@ -12,9 +13,14 @@ export default function About() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <h1>About</h1>
-      
 
+      <br></br>
+      
+     
+      <div className='relative m-20'>
+    
+      <LoginForm />
+      </div>
       
     </div>
   )
