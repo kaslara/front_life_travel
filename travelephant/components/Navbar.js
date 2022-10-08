@@ -14,7 +14,7 @@ function Navbar() {
 						<div className="flex items-center  mx-20  justify-between w-full">
 							<div className="flex justify-center items-center flex-shrink-0 ">
 								<h1 className=" font-bold text-xl cursor-pointer">
-									Trav<span className="text-purple-500">Elephant</span>
+									Trav<span className="text-indigo-600">Elephant</span>
 								</h1>
 							</div>
 							<div className="hidden md:block">
@@ -25,7 +25,7 @@ function Navbar() {
 										smooth={true}
 										offset={50}
 										duration={500}
-										className="cursor-pointer text-purple-600 font-semibold px-3 py-2 text-md hover:font-black"
+										className="cursor-pointer text-indigo-600 font-semibold px-3 py-2 text-md hover:font-black"
 									>
 										Home
 									</Link>
@@ -35,7 +35,7 @@ function Navbar() {
 										smooth={true}
 										offset={50}
 										duration={500}
-										className="cursor-pointer hover:bg-purple-600 text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+										className="cursor-pointer hover:bg-indigo-600 text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
 									>
 										Contact
 									</Link>
@@ -46,7 +46,7 @@ function Navbar() {
 										smooth={true}
 										offset={50}
 										duration={500}
-										className="cursor-pointer hover:bg-purple-600 text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+										className="cursor-pointer hover:bg-indigo-600 text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
 									>
 										Account
 									</Link>
@@ -57,7 +57,7 @@ function Navbar() {
 							<button
 								onClick={() => setIsOpen(!isOpen)}
 								type="button"
-								className="bg-blue-600 inline-flex items-center justify-center p-2 rounded-md text-white  hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-purple-800 focus:ring-white"
+								className="bg-indigo-500 inline-flex items-center justify-center p-2 rounded-md text-white  hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-700 focus:ring-white"
 								aria-controls="mobile-menu"
 								aria-expanded="false"
 							>
@@ -120,7 +120,7 @@ function Navbar() {
 									smooth={true}
 									offset={50}
 									duration={500}
-									className="cursor-pointer hover:bg-purple-600 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+									className="cursor-pointer hover:bg-indigo-600 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
 								>
 									Home
 								</Link>
@@ -129,7 +129,7 @@ function Navbar() {
 									smooth={true}
 									offset={50}
 									duration={500}
-									className="cursor-pointer hover:bg-purple-600 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+									className="cursor-pointer hover:bg-indigo-600 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
 								>
 									Contact
 								</Link>
@@ -139,7 +139,7 @@ function Navbar() {
 									smooth={true}
 									offset={50}
 									duration={500}
-									className="cursor-pointer hover:bg-purple-600 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+									className="cursor-pointer hover:bg-indigo-600 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
 								>
 									Account
 								</Link>
