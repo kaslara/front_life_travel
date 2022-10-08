@@ -8,7 +8,7 @@ function Navbar() {
 	const [isOpen, setIsOpen] = useState(false);
 	return (
 		<div>
-			<nav className=" shadow-sm fixed w-full z-10">
+			<nav className=" shadow-sm fixed w-full ">
 				<div className="w-full">
 					<div className="flex items-center h-20 w-full">
 						<div className="flex items-center  mx-20  justify-between w-full">
@@ -21,7 +21,7 @@ function Navbar() {
 								<div className="ml-10 flex items-baseline space-x-4">
 									<Link
 										activeClass="Home"
-										to="home"
+									href="http://localhost:3000"
 										smooth={true}
 										offset={50}
 										duration={500}
@@ -31,7 +31,7 @@ function Navbar() {
 									</Link>
 									<Link
 										activeClass="contact"
-										to="contact"
+										href="http://localhost:3000/contact"
 										smooth={true}
 										offset={50}
 										duration={500}
@@ -42,7 +42,7 @@ function Navbar() {
 
 									<Link
 										activeClass="account"
-										to="account"
+										href="http://localhost:3000/account"
 										smooth={true}
 										offset={50}
 										duration={500}
@@ -116,9 +116,7 @@ function Navbar() {
 								className="bg-white px-2 pt-2 pb-3 space-y-1 sm:px-3"
 							>
 								<Link
-									href="/home"
-									activeClass="home"
-									to="home"
+									href="http://localhost:3000"
 									smooth={true}
 									offset={50}
 									duration={500}
@@ -127,9 +125,7 @@ function Navbar() {
 									Home
 								</Link>
 								<Link
-									href="/contact"
-									activeClass="contact"
-									to="contact"
+									href="http://localhost:3000/contact"
 									smooth={true}
 									offset={50}
 									duration={500}
@@ -139,9 +135,7 @@ function Navbar() {
 								</Link>
 
 								<Link
-									href="/account"
-									activeClass="account"
-									to="account"
+									href="http://localhost:3000/account"
 									smooth={true}
 									offset={50}
 									duration={500}
