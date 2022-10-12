@@ -4,6 +4,10 @@ function Bus({bus}){
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Bus Company: {bus.name}</h5>
          <p class="font-normal text-gray-700 dark:text-gray-400">From: {bus.departure}</p>
          <p class="font-normal text-gray-700 dark:text-gray-400">To: {bus.destination}</p>
+         <p class="font-normal text-gray-700 dark:text-gray-400">Departure Time: {bus.departureTime}</p>
+         <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">Rezervo</button>
+
+
        </a>
     )
 }
