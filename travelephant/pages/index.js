@@ -8,8 +8,8 @@ import { info } from "autoprefixer";
 export default function Home({buses}){
     return ( 
         <div className='container'>
-        <Navbar />
-          <div className=" relative p-36 z-0">
+        <Navbar absolute/>
+          <div className=" relative p-36">
               <Formik
                    initialValues={{
                        username: '',
