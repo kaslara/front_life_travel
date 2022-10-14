@@ -1,99 +1,32 @@
-import Head from "next/head";
-import Bus from '../components/bus'
-import Navbar from '../components/Navbar'
-import { Formik, Field, Form } from 'formik';
-import { useState } from "react";
-import { info } from "autoprefixer";
+import  Link  from "next/link";
+
 
 export default function Home({buses}){
     return ( 
-        <div className='container'>
-        <Navbar />
-          <div className=" relative p-36 z-0">
-              <Formik
-                   initialValues={{
-                       username: '',
-                       password: '',
-                   }}
-      
-                   onSubmit={() => {
-      
-                   }}
-               >
-                   <Form className="border-solid border-2 p-3 text-center" onSubmit={handleOnSubmitSearch}>
-                        <label>From: </label>                       
-                        <Field type="text" id="departure" name="departure" placeholder="Departure" />
-                        <label>To: </label>                       
-                        <Field type="text" id="destination" name="destination" placeholder="Destination" />
-                        {/* <label>From time: </label> 
-                        <Field type="time" id="destinationTime" name="destinationTime" />
-                        <label>To time: </label> 
-                        <Field type="time" id="departureTime" name="departureTime" /> */}
-                        
-                        <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">Search Bus Lines</button>
-                   </Form>
-               </Formik>
-
-       <div className="ml-2 mt-4 relative w-full" id="bus-lines">  
-           {
-                buses.map(bus => {
-                    return (
-                        <div key={bus.id}>
-                            <Bus bus={bus} />
-                        </div>
-                    )
-                })
-            }
-            
-         </div>
-         </div>
-         </div>
-         
-    )
-}
-
-    export async function getStaticProps(){                     
-     const response = await fetch('http://localhost:5196/all-bus-info')
-        const data = await response.json()
-        return {
-            props: {
-                buses: data,
-            },
-        }
+        <div className="mt-1">
+        <div className="flex bg-white h-96 container mx-auto">
+          <div className="flex items-center text-center lg:text-left px-8 md:px-12 lg:w-1/2">
+            <div>
+              <h2 className="text-3xl font-semibold text-gray-800 md:text-4xl">
+                Welcome to <span className="text-indigo-600">ElephanTravel</span>
+              </h2>
+              <p className="mt-2 text-sm text-gray-500 md:text-base">
+                Welcome to my Personal website. Here you can get to know About
+                me and as well as you can explore the blogs section and get to know
+                what sort of things I post here. Find best bus lines.
+              </p>
+              <div className="flex justify-center lg:justify-start mt-6">
+                <button className="md:mt-0 mt-2 md:mr-0 mr-2 bg-indigo-500 px-5 py-3 rounded-xl text-sm text-white hover:text-white shadow-xl hover:shadow-xl hover:shadow-indigo-300/80 shadow-indigo-400/40 hover:bg-indigo-600"><Link href="/contact"><a>About me</a></Link></button> 
+                <button className="md:mt-0 mt-2 ml-2 md:mr-0 mr-2 bg-indigo-500 px-5 py-3 rounded-xl text-sm text-white hover:text-white shadow-xl hover:shadow-xl hover:shadow-indigo-300/80 shadow-indigo-400/40 hover:bg-indigo-600"><Link href="/search"><a>Search buses</a></Link></button> 
+              </div>
+            </div>
+          </div>
+          <div className="hidden lg:block lg:w-1/2" style={{clipPath: "polygon(10% 0, 100% 0%, 100% 100%, 0 100%)"}}>
+            <div className="h-full object-cover" style={{backgroundImage: `url('https://www.kaleidoscopeadventures.com/wp-content/uploads/2019/07/tour-bus.jpg')`}}>
+              <div className="h-full bg-black opacity-25"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      )
     }
-    function handleOnSubmitSearch(e) {
-      e.preventDefault();
-      const destination = document.querySelector('#destination').value
-      const departure = document.querySelector('#departure').value
-      let endpoint = ''; 
-      if(destination && departure) 
-        endpoint = `http://localhost:5196/sepcific-bus-info?Departure=${departure}&Destination=${destination}`;
-      else
-        endpoint = 'http://localhost:5196/all-bus-info';
-      fetch(endpoint)
-      .then(res => res.json())
-      .then((data) => {
-        renderBusLines(data);
-      })
-    }
-
-    function renderBusLines(data){
-        if(data && data.length > 0) {
-            document.querySelector("#bus-lines").innerHTML = "";
-            data.forEach(busline => {
-                var node = document.createElement('div');
-                node.innerHTML = `
-                    <a class=" block m-2 p-6 max-w-full bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Bus Company: ${busline.name}</h5>
-                    <p class="font-normal text-gray-700 dark:text-gray-400">From: ${busline.departure}</p>
-                    <p class="font-normal text-gray-700 dark:text-gray-400">To: ${busline.destination}</p>
-                    <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">Rezervo</button>
-                    </a>`
-                document.querySelector("#bus-lines").appendChild(node)
-            });
-        }
-        else {
-            document.querySelector("#bus-lines").innerHTML = "There are no bus lines!";
-        }
-    }
-
