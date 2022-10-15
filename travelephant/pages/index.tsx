@@ -1,6 +1,7 @@
 import  Link  from "next/link";
 import Layout from "../components/Layout"
 import {useEffect, useState} from "react";
+import Footer from "../components/Footer"
 
 
 export default function Home({buses}){
@@ -29,7 +30,7 @@ export default function Home({buses}){
         <div className="flex bg-white h-96 container mx-auto">
           <div className="flex items-center text-center lg:text-left px-8 md:px-12 lg:w-1/2">
             <div>
-              <h2 className="text-3xl font-semibold text-gray-800 md:text-4xl">
+              <h2 className="text-3xl font-bold text-gray-800 md:text-4xl">
                 Welcome to <span className="text-indigo-600">ElephanTravel</span>
               </h2>
               <p className="mt-2 text-sm text-gray-500 md:text-base">
@@ -49,6 +50,7 @@ export default function Home({buses}){
             </div>
           </div>
         </div>
+        <Footer />
       </div>
       </Layout>
       )
