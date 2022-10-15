@@ -1,8 +1,30 @@
 import  Link  from "next/link";
+import Layout from "../components/Layout"
+import {useEffect, useState} from "react";
 
 
 export default function Home({buses}){
+  const [auth, setAuth] = useState(false);
+  useEffect(() => {
+    (
+        async () => {
+            try {
+                const response = await fetch('http://localhost:5196/user', {
+                    credentials: 'include',
+                });
+
+                const content = await response.json();
+                console.log(content);
+                setAuth(true);
+            } catch (e) {
+                setAuth(false);
+            }
+        }
+    )();
+});
+
     return ( 
+      <Layout auth={auth}>
         <div className="mt-1">
         <div className="flex bg-white h-96 container mx-auto">
           <div className="flex items-center text-center lg:text-left px-8 md:px-12 lg:w-1/2">
@@ -28,5 +50,6 @@ export default function Home({buses}){
           </div>
         </div>
       </div>
+      </Layout>
       )
     }

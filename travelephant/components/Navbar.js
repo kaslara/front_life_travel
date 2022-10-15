@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Link from 'next/link'
-function Navbar(){
+function Navbar(props){
   const [showLink, setShowLink] = useState(false);
 
   const toggleLink = () => {
@@ -8,6 +8,7 @@ function Navbar(){
   };
 
   return (
+    <>
     <header className='flex flex-wrap flex-row justify-between md:items-center md:space-x-4 bg-white py-6 px-6 relative shadow-md'>
 		<Link href='/'>
 		<a className='block'>
@@ -60,6 +61,10 @@ function Navbar(){
         
       </nav>
     </header>
+    <main>
+      {props.children}
+    </main>
+    </>
   );
 };
 
