@@ -45,7 +45,7 @@ export default function Register() {
     <div className='bg-white block items-center justify-center p-8 md:flex'>
       <div className='bg-cover bg-indigo-600 flex flex-col items-center max-w-screen-lg overflow-hidden rounded-lg shadow-lg text-gray-600 w-full md:flex-row'>
         <div className='backdrop-blur-sm backdrop-filter flex flex-col items-center justify-center p-4 text-white w-full md:w-1/2'>
-          <h1 className='font-small text-3xl'>Trav<span>Elephant</span></h1>
+          <h1 className='font-small text-3xl'>TravElephant</h1>
         </div>
 
         {/* form */}
@@ -56,7 +56,7 @@ export default function Register() {
           </div>
 
           {/* inputs */}
-          <form className='flex flex-col items-center p-4' onSubmit={submit}>
+          <form className='flex flex-col items-center p-4 space-y-4' onSubmit={submit}>
             <div className='relative'>
               <span className='absolute flex inset-y-0 items-center pl-3 text-gray-400'><FaUser /></span>
               <input className='border border-gray-300 outline-none placeholder-gray-400 pl-9 pr-4 py-1 rounded-md transition focus:ring-2 focus:ring-indigo-600' placeholder='Username' type='text' onChange={e => setUsername(e.target.value)}/>

@@ -53,7 +53,7 @@ export default function Search({buses}) {
                    }}
                >
                 
-                   <Form className="block border-solid border-2 p-3 text-center" onSubmit={handleOnSubmitSearch}>
+                   <Form className="block border-solid border-2 p-3 text-center space-x-4" onSubmit={handleOnSubmitSearch}>
                     <img src="/travel.jpg" className="justify-center"></img>                      
 
                         <label>From: </label>                       
