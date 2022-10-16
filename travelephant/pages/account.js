@@ -1,8 +1,9 @@
 import Layout from "../components/Layout"
 import {useEffect, useState} from "react";
 import Image from "next/image";
+import { Formik, Field, Form } from 'formik';
 
-export default function Account() {
+export default function Account(tickets) {
   const [auth, setAuth] = useState(false);
   const[username,setUsername]=useState('');
   const[name,setName]=useState('');
@@ -60,14 +61,58 @@ export default function Account() {
     <h1 className="text-3xl font-medium text-indigo-300 justify-center flex">Tickets you reserved</h1>
     <div id="bus-lines">
       {
-        
+          handleOnSubmitSearch()
       }
 
     </div>
     
   </div>
   </div>
+  
 </Layout>
   )
+function handleOnSubmitSearch(e) {
+  
+  let endpoint = ''; 
+  endpoint = `http://localhost:5196/get-tickets?Id=${userId}`;
+  fetch(endpoint)
+  .then(res => res.json())
+  .then((data) => {
+    renderTickets(data);
+  })
 }
 
+}
+
+
+function handleOnSubmitSearch(e) {
+  e.preventDefault();
+  let endpoint = ''; 
+  endpoint = `http://localhost:5196/get-tickets?Id=${userId}`;
+  fetch(endpoint)
+  .then(res => res.json())
+  .then((data) => {
+    renderTickets(data);
+  })
+}
+
+function renderTickets(data){
+    if(data && data.length > 0) {
+        document.querySelector("#get-ticket").innerHTML = "";
+        data.forEach(ticket => {
+            var node = document.createElement('div');
+            node.innerHTML = `
+                <a class=" block m-2 p-6 max-w-full bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                <p class="font-normal text-gray-700 dark:text-gray-400">From: ${ticket.departure}</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">To: ${ticket.destination}</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">Price: ${ticket.name}</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">Price: ${ticket.surname}</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">Price: ${ticket.active}</p>
+                </a>`
+            document.querySelector("#get-ticket").appendChild(node)
+        });
+    }
+    else {
+        document.querySelector("#get-ticket").innerHTML = "There are Ticket!";
+    }
+}
