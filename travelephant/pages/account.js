@@ -79,7 +79,7 @@ export default function Account(tickets) {
     if (!username){
       return;
     }
-    endpoint = `http://localhost:5196/get-tickets?Username=${username}`;
+    endpoint = `http://20.126.228.220/get-tickets?Username=${username}`;
     fetch(endpoint)
     .then(res => res.json())
     .then((data) => {
