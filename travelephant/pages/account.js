@@ -22,13 +22,16 @@ export default function Account(tickets) {
                 });
 
                 const content = await response.json();
+                console.log("ID");
                 setUsername(content.username);
                 setName(content.name);
                 setUserId(content.userId);
                 setAddress(content.address);
                 setSurname(content.surname);
                 setUserId(content.userID);
-                
+                console.log(userId);
+                console.log({userId});
+                handleOnSubmitSearch();
                 
                 setAuth(true);
             } catch (e) {
@@ -61,7 +64,7 @@ export default function Account(tickets) {
     <h1 className="text-3xl font-medium text-indigo-300 justify-center flex">Tickets you reserved</h1>
     <div id="bus-lines">
       {
-          handleOnSubmitSearch()
+          
       }
 
     </div>
@@ -71,34 +74,25 @@ export default function Account(tickets) {
   
 </Layout>
   )
-function handleOnSubmitSearch(e) {
-  
-  let endpoint = ''; 
-  endpoint = `http://localhost:5196/get-tickets?Id=${userId}`;
-  fetch(endpoint)
-  .then(res => res.json())
-  .then((data) => {
-    renderTickets(data);
-  })
-}
+  function handleOnSubmitSearch(e) {
+    let endpoint = ''; 
+    console.log("username");
+    console.log(username);
+    console.log({username});
+    endpoint = `http://localhost:5196/get-tickets?Username=${username}`;
+    fetch(endpoint)
+    .then(res => res.json())
+    .then((data) => {
+      renderTickets(data);
+    })
+  }
 
 }
 
-
-function handleOnSubmitSearch(e) {
-  e.preventDefault();
-  let endpoint = ''; 
-  endpoint = `http://localhost:5196/get-tickets?Id=${userId}`;
-  fetch(endpoint)
-  .then(res => res.json())
-  .then((data) => {
-    renderTickets(data);
-  })
-}
 
 function renderTickets(data){
     if(data && data.length > 0) {
-        document.querySelector("#get-ticket").innerHTML = "";
+        document.querySelector("#bus-lines").innerHTML = "";
         data.forEach(ticket => {
             var node = document.createElement('div');
             node.innerHTML = `
@@ -109,10 +103,20 @@ function renderTickets(data){
                 <p class="font-normal text-gray-700 dark:text-gray-400">Price: ${ticket.surname}</p>
                 <p class="font-normal text-gray-700 dark:text-gray-400">Price: ${ticket.active}</p>
                 </a>`
-            document.querySelector("#get-ticket").appendChild(node)
+            document.querySelector("#bus-lines").appendChild(node)
         });
     }
     else {
-        document.querySelector("#get-ticket").innerHTML = "There are Ticket!";
+        document.querySelector("#bus-lines").innerHTML = "There are no reserved Tickets!";
     }
 }
+
+export async function getStaticProps(){                     
+  const response = await fetch('http://localhost:5196/get-all-tickets')
+     const data = await response.json()
+     return {
+         props: {
+             tick: data,
+         },
+     }
+    }
