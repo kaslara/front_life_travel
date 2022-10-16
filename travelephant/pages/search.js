@@ -28,7 +28,7 @@ export default function Search({buses}) {
                   const content = await response.json();
   
                   setAuth(true);
-                  setUserId(content.UserID)
+                  setUserId(content.userId)
                   console.log(userId);
               } catch (e) {
                   setAuth(false);
@@ -53,7 +53,7 @@ export default function Search({buses}) {
                    }}
                >
                 
-                   <Form className="block border-solid border-2 p-3 text-center space-x-4" onSubmit={handleOnSubmitSearch}>
+                   <Form className="block border-solid border-2 p-3 text-center" onSubmit={handleOnSubmitSearch}>
                     <img src="/travel.jpg" className="justify-center"></img>                      
 
                         <label>From: </label>                       
@@ -75,12 +75,12 @@ export default function Search({buses}) {
                     return (
                         <div key={bus.id}>
                             <Bus  
-                                id={bus.busId}
-                                name={bus.name}
-                                departure={bus.departure}
-                                destination={bus.destination}
-                                departureTime={bus.departureTime}
-                                price={bus.price}
+                            id={bus.id}
+                            name={bus.name}
+                            departure={bus.departure}
+                            destination={bus.destination}
+                            departureTime={bus.departureTime}
+                            price={bus.price}
                             />
                         </div>
                     )
@@ -128,12 +128,16 @@ export default function Search({buses}) {
                    data.forEach(busline => {
                        var node = document.createElement('div');
                        node.innerHTML = `
-                           <a class=" block m-2 p-6 max-w-full bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                           <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Bus Company: ${busline.name}</h5>
-                           <p class="font-normal text-gray-700 dark:text-gray-400">From: ${busline.departure}</p>
-                           <p class="font-normal text-gray-700 dark:text-gray-400">To: ${busline.destination}</p>
-                           <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">Rezervo</button>
-                           </a>`
+                       <h1>Hello</h1>
+                            <Bus 
+                                id=${busline.id}
+                                name=${busline.name}
+                                departure=${busline.departure}
+                                destination=${busline.destination}
+                                departureTime=${busline.departureTime}
+                                price=${busline.price}
+                                />
+                                <h1>Bye</h1>`
                        document.querySelector("#bus-lines").appendChild(node)
                    });
                }

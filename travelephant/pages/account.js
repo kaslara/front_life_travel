@@ -49,6 +49,8 @@ export default function Account() {
 
     />
     <div className="m-10 ">
+    <h1 className="text-xl font-medium text-indigo-400">Name: {userId}</h1>
+
       <h1 className="text-xl font-medium text-indigo-400">Name: {name}</h1>
       <h2 className="text-xl font-medium text-indigo-400">Surname: {surname}</h2>
       <p className="text-md text-indigo-900">Address: {address}</p>

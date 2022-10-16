@@ -5,6 +5,7 @@ function Bus({id,name,departure,destination, departureTime,price}){
   const [userId, setUserId]=useState('');
 const router = useRouter();
 const [auth, setAuth] = useState(false);
+
 useEffect(() => {
   (
       async () => {
@@ -17,7 +18,6 @@ useEffect(() => {
 
               setAuth(true);
               setUserId(content.userId)
-              console.log(userId);
           } catch (e) {
               setAuth(false);
           }
@@ -30,6 +30,8 @@ async function reserveticket(e){
     await router.push('/login');
   }
   else{
+    console.log({id});
+
   let url=`http://localhost:5196/book-ticket?UserID=${userId}&BusID=${id}`;
   const endpoint=url;
   const options={
@@ -39,6 +41,7 @@ async function reserveticket(e){
   
   }
   const response=await fetch(endpoint,options);
+  console.log(response);
   }
 }
     return (
