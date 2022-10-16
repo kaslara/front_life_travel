@@ -13,7 +13,7 @@ const Layout = (props) => {
     const router = useRouter();
 
     const logout = async () => {
-        await fetch('http://localhost:5196/logout', {
+        await fetch('http://20.126.228.220/logout', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             credentials: 'include',
