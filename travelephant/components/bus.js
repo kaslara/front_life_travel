@@ -30,9 +30,7 @@ async function reserveticket(e){
     await router.push('/login');
   }
   else{
-    console.log({id});
-
-  let url=`http://localhost:5196/book-ticket?UserID=${userId}&BusID=${id}`;
+  let url=`http://localhost:5196/book-ticket?UserID=${userId}&Departure=${departure}&DepartureTime=${departureTime}`;
   const endpoint=url;
   const options={
     method:'POST',
