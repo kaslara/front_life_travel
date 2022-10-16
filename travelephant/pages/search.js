@@ -74,14 +74,14 @@ export default function Search({buses}) {
                 buses.map(bus => {
                     return (
                         <div key={bus.id}>
-                            <a class="block md:m-1 p-6 max-w-full bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Bus Company: {bus.name}</h5>
-                                <p className="font-normal text-gray-700 dark:text-gray-400">From: {bus.departure}</p>
-                                <p className="font-normal text-gray-700 dark:text-gray-400">To: {bus.destination}</p>
-                                <p className="font-normal text-gray-700 dark:text-gray-400">Departure Time: {bus.departureTime}</p>
-                                <p className="font-normal text-gray-700 dark:text-gray-400">Price: {bus.price}</p>
-                                <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" onClick={reserveticket}>Rezervo</button>
-                            </a>
+                            <Bus  
+                                id={bus.id}
+                                name={bus.name}
+                                departure={bus.departure}
+                                destination={bus.destination}
+                                departureTime={bus.departureTime}
+                                price={bus.price}
+                            />
                         </div>
                     )
                 })
@@ -93,27 +93,7 @@ export default function Search({buses}) {
          </Layout>
          
     )
-    function reserveticket(e){
-        if(auth==false){
-          router.push('/login');
-        }
-        else{
-         {reserve}
-        }
-        const reserve = async (e) => {
-         let endpoint='';
-         setBusId(bus.busID);
-         console.log(busId);
-         e.preventDefault();
-         endpoint = `http://localhost:5196/book-ticket?UserID=${userId}&BusID=${busId}`;
-         const response= await fetch(endpoint)
-         const data=await response.json()
-         console.log(data);
-       
-         await router.push('/');
-       }
-       
-       }
+    
 }
           export async function getStaticProps(){                     
             const response = await fetch('http://localhost:5196/all-bus-info')
