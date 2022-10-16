@@ -39,7 +39,7 @@ export default function Register() {
   return (
     <Layout auth={false} >
     
-      <div className='relative m-20'>
+      
     
        {/* container */}
     <div className='bg-white block items-center justify-center p-8 md:flex'>
@@ -92,7 +92,7 @@ export default function Register() {
       </div>
     </div>
 
-      </div>
+      
       
 </Layout>
   )

@@ -28,7 +28,7 @@ export default function Search({buses}) {
                   const content = await response.json();
   
                   setAuth(true);
-                  setUserId(content.userId)
+                  setUserId(content.UserID)
                   console.log(userId);
               } catch (e) {
                   setAuth(false);
@@ -39,8 +39,8 @@ export default function Search({buses}) {
 
     return (
         <Layout auth={auth}>
-        <div className='container'>
-          <div className=" relative p-36 z-0">
+        <div className='flex flex-col items-center p-4 space-y-4'>
+          <div className="relative" >
              <div>
               <Formik
                    initialValues={{
@@ -53,34 +53,34 @@ export default function Search({buses}) {
                    }}
                >
                 
-                   <Form className="block border-solid border-2 p-3 text-center" onSubmit={handleOnSubmitSearch}>
+                   <Form className="flex flex-col rounded-lg border p-3 border-gray-200 shadow-md  text-center space-y-4 justify-around items-start p-0'" onSubmit={handleOnSubmitSearch}>
                     <img src="/travel.jpg" className="justify-center"></img>                      
 
                         <label>From: </label>                       
                         <Field type="text" id="departure" name="departure" placeholder="Departure" />
                         <label>To: </label>                       
                         <Field type="text" id="destination" name="destination" placeholder="Destination" />
-                        {/* <label>From time: </label> 
-                        <Field type="time" id="destinationTime" name="destinationTime" />
+                        <label>From time: </label> 
+                        <Field type="number" id="destinationTime" name="destinationTime" />
                         <label>To time: </label> 
-                        <Field type="time" id="departureTime" name="departureTime" /> */}
+                        <Field type="number" id="departureTime" name="departureTime" />
                         
-                        <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">Search Bus Lines</button>
+                        <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">Search</button>
                    </Form>
                </Formik>
                </div>
-       <div className="ml-2 mt-4 relative w-full" id="bus-lines">  
+       <div className="ml-2 mt-4 relative w-full " id="bus-lines">  
            {
                 buses.map(bus => {
                     return (
                         <div key={bus.id}>
                             <Bus  
-                            id={bus.id}
-                            name={bus.name}
-                            departure={bus.departure}
-                            destination={bus.destination}
-                            departureTime={bus.departureTime}
-                            price={bus.price}
+                                id={bus.busId}
+                                name={bus.name}
+                                departure={bus.departure}
+                                destination={bus.destination}
+                                departureTime={bus.departureTime}
+                                price={bus.price}
                             />
                         </div>
                     )
@@ -110,9 +110,11 @@ export default function Search({buses}) {
              e.preventDefault();
              const destination = document.querySelector('#destination').value
              const departure = document.querySelector('#departure').value
+             const fromtime = document.querySelector('#destinationTime').value
+             const totime = document.querySelector('#departureTime').value
              let endpoint = ''; 
              if(destination && departure) 
-               endpoint = `http://localhost:5196/sepcific-bus-info?Departure=${departure}&Destination=${destination}`;
+               endpoint = `http://localhost:5196/sepcific-bus-info?Departure=${departure}&Destination=${destination}&fromTime=${fromtime}&toTime=${totime}`;
              else
                endpoint = 'http://localhost:5196/all-bus-info';
              fetch(endpoint)
@@ -128,16 +130,13 @@ export default function Search({buses}) {
                    data.forEach(busline => {
                        var node = document.createElement('div');
                        node.innerHTML = `
-                       <h1>Hello</h1>
-                            <Bus 
-                                id=${busline.id}
-                                name=${busline.name}
-                                departure=${busline.departure}
-                                destination=${busline.destination}
-                                departureTime=${busline.departureTime}
-                                price=${busline.price}
-                                />
-                                <h1>Bye</h1>`
+                           <a class=" block m-2 p-6 max-w-full bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                           <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Bus Company: ${busline.name}</h5>
+                           <p class="font-normal text-gray-700 dark:text-gray-400">From: ${busline.departure}, Time: ${busline.departureTime}</p>
+                           <p class="font-normal text-gray-700 dark:text-gray-400">To: ${busline.destination}, ${busline.arrivalTime}</p>
+                           <p class="font-normal text-gray-700 dark:text-gray-400">Price: ${busline.price}</p>
+                           <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">Rezervo</button>
+                           </a>`
                        document.querySelector("#bus-lines").appendChild(node)
                    });
                }
@@ -145,7 +144,6 @@ export default function Search({buses}) {
                    document.querySelector("#bus-lines").innerHTML = "There are no bus lines!";
                }
            }
-       
        
 
 
