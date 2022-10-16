@@ -1,6 +1,9 @@
 import Layout from "../components/Layout"
 import {useEffect, useState} from "react";
 import Image from "next/image";
+import { Formik, Field, Form } from 'formik';
+
+
 
 export default function Account() {
   const [auth, setAuth] = useState(false);
@@ -19,7 +22,6 @@ export default function Account() {
                 const response = await fetch('http://localhost:5196/user', {
                     credentials: 'include',
                 });
-
                 const content = await response.json();
                 setUsername(content.username);
                 setName(content.name);
@@ -27,15 +29,15 @@ export default function Account() {
                 setAddress(content.address);
                 setSurname(content.surname);
                 setUserId(content.userID);
-                
-                
                 setAuth(true);
+                getTickets();
             } catch (e) {
                 setAuth(false);
             }
         }
     )();
 });
+
  
   return (
 <Layout auth={auth}>
@@ -61,15 +63,57 @@ export default function Account() {
   <div className="m-2">
     <h1 className="text-3xl font-medium text-indigo-300 justify-center flex">Tickets you reserved</h1>
     <div id="bus-lines">
-      {
-        
-      }
 
     </div>
     
   </div>
   </div>
+  
 </Layout>
   )
+  function getTickets() {
+    if(!username)
+      return;
+    fetch(`http://localhost:5196/get-tickets?Username=${username}`)
+    .then(res => res.json())
+    .then((data) => {
+      renderTickets(data);
+    })
+  }
 }
 
+
+function renderTickets(data){
+    if(data && data.length > 0) {
+        document.querySelector("#bus-lines").innerHTML = "";
+        data.forEach(ticket => {
+            var node = document.createElement('div');
+            node.innerHTML = `
+                <a class=" block m-2 p-6 max-w-full bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                <p class="font-normal text-gray-700 dark:text-gray-400">From: ${ticket.departure}</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">To: ${ticket.destination}</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">Price: ${ticket.name}</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">Price: ${ticket.surname}</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">Price: ${ticket.active}</p>
+                </a>`
+            document.querySelector("#bus-lines").appendChild(node)
+        });
+    }
+    else {
+        document.querySelector("#bus-lines").innerHTML = "There are no reserved Tickets!";
+    }
+}
+
+// export async function getStaticProps(){                     
+//   const response = await fetch('http://localhost:5196/user', {
+//    credentials: 'include',
+//   });
+//   console.log(response.status);
+//   const data = await response.json();
+//   // let result = JSON.stringify(data);
+//   return {
+//       props: {
+//           userInfo: data,
+//       },
+//   }
+// }
