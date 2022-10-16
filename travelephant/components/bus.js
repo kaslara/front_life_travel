@@ -5,7 +5,6 @@ function Bus({id,name,departure,destination, departureTime,price}){
   const [userId, setUserId]=useState('');
 const router = useRouter();
 const [auth, setAuth] = useState(false);
-
 useEffect(() => {
   (
       async () => {
@@ -17,7 +16,7 @@ useEffect(() => {
               const content = await response.json();
 
               setAuth(true);
-              setUserId(content.UserID)
+              setUserId(content.userId)
               console.log(userId);
           } catch (e) {
               setAuth(false);
@@ -25,26 +24,27 @@ useEffect(() => {
       }
   )();
 });
-const [busId,setBusId]=useState('');
 async function reserveticket(e){
   e.preventDefault();
-  let url=`http://localhost:5196/book-ticket?UserID=${userId}&BusID=${id}`
+  if(auth==false){
+    await router.push('/login');
+  }
+  else{
+  let url=`http://localhost:5196/book-ticket?UserID=${userId}&BusID=${id}`;
   const endpoint=url;
   const options={
-    method:'GET',
-    headers:{
-      'Content-Type':'application/json'
-    }
+    method:'POST',
+    headers: {'Content-Type': 'application/json'},
+    credentials: 'include',
+  
   }
   const response=await fetch(endpoint,options);
-  console.log(response);
-
+  }
 }
     return (
       
        <a class="block md:m-1 p-6 max-w-full bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Bus Company: {name}</h5>
-        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Bus Company: {id}</h5>
          <p className="font-normal text-gray-700 dark:text-gray-400">From: {departure}</p>
          <p className="font-normal text-gray-700 dark:text-gray-400">To: {destination}</p>
          <p className="font-normal text-gray-700 dark:text-gray-400">Departure Time: {departureTime}</p>

@@ -14,6 +14,7 @@ export default function Login() {
 
   const submit = async (e) => {
     e.preventDefault();
+    console.log("hi");
     const response= await fetch('http://localhost:5196/login', {
         method: 'POST',
         body: JSON.stringify({

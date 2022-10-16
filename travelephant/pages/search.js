@@ -75,7 +75,7 @@ export default function Search({buses}) {
                     return (
                         <div key={bus.id}>
                             <Bus  
-                                id={bus.id}
+                                id={bus.busId}
                                 name={bus.name}
                                 departure={bus.departure}
                                 destination={bus.destination}

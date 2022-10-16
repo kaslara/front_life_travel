@@ -36,32 +36,7 @@ export default function Account() {
         }
     )();
 });
- function getStaticProps(){       
-  let endpoint=`http://localhost:5196/all-bus-info`;              
-  fetch(endpoint)
-             .then(res => res.json())
-             .then((data) => {
-               renderBusLines(data);
-  })
- }
- function renderBusLines(data){
-  if(data && data.length > 0) {
-      document.querySelector("#bus-lines").innerHTML = "";
-      data.forEach(busline => {
-          var node = document.createElement('div');
-          node.innerHTML = `
-              <a class=" block m-2 p-6 max-w-full bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Bus Company: ${busline.name}</h5>
-              <p class="font-normal text-gray-700 dark:text-gray-400">From: ${busline.departure}</p>
-              <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">Rezervo</button>
-              </a>`
-          document.querySelector("#bus-lines").appendChild(node)
-      });
-  }
-  else {
-      document.querySelector("#bus-lines").innerHTML = "There are no bus lines!";
-  }
-}
+ 
   return (
 <Layout auth={auth}>
   <div>
