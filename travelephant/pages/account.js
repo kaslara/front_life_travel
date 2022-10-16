@@ -3,7 +3,9 @@ import {useEffect, useState} from "react";
 import Image from "next/image";
 import { Formik, Field, Form } from 'formik';
 
-export default function Account(tickets) {
+
+
+export default function Account() {
   const [auth, setAuth] = useState(false);
   const[username,setUsername]=useState('');
   const[name,setName]=useState('');
@@ -20,26 +22,22 @@ export default function Account(tickets) {
                 const response = await fetch('http://localhost:5196/user', {
                     credentials: 'include',
                 });
-
                 const content = await response.json();
-                console.log("ID");
                 setUsername(content.username);
                 setName(content.name);
                 setUserId(content.userId);
                 setAddress(content.address);
                 setSurname(content.surname);
                 setUserId(content.userID);
-                console.log(userId);
-                console.log({userId});
-                handleOnSubmitSearch();
-                
                 setAuth(true);
+                getTickets();
             } catch (e) {
                 setAuth(false);
             }
         }
     )();
 });
+
  
   return (
 <Layout auth={auth}>
@@ -63,9 +61,6 @@ export default function Account(tickets) {
   <div className="m-2">
     <h1 className="text-3xl font-medium text-indigo-300 justify-center flex">Tickets you reserved</h1>
     <div id="bus-lines">
-      {
-          
-      }
 
     </div>
     
@@ -74,19 +69,15 @@ export default function Account(tickets) {
   
 </Layout>
   )
-  function handleOnSubmitSearch(e) {
-    let endpoint = ''; 
-    console.log("username");
-    console.log(username);
-    console.log({username});
-    endpoint = `http://localhost:5196/get-tickets?Username=${username}`;
-    fetch(endpoint)
+  function getTickets() {
+    if(!username)
+      return;
+    fetch(`http://localhost:5196/get-tickets?Username=${username}`)
     .then(res => res.json())
     .then((data) => {
       renderTickets(data);
     })
   }
-
 }
 
 
@@ -111,12 +102,16 @@ function renderTickets(data){
     }
 }
 
-export async function getStaticProps(){                     
-  const response = await fetch('http://localhost:5196/get-all-tickets')
-     const data = await response.json()
-     return {
-         props: {
-             tick: data,
-         },
-     }
-    }
+// export async function getStaticProps(){                     
+//   const response = await fetch('http://localhost:5196/user', {
+//    credentials: 'include',
+//   });
+//   console.log(response.status);
+//   const data = await response.json();
+//   // let result = JSON.stringify(data);
+//   return {
+//       props: {
+//           userInfo: data,
+//       },
+//   }
+// }
