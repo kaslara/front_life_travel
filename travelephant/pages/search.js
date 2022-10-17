@@ -21,7 +21,7 @@ export default function Search({buses}) {
       (
           async () => {
               try {
-                  const response = await fetch('http://10.0.247.202/user', {
+                  const response = await fetch('http://travelephant-backend-service/user', {
                       credentials: 'include',
                   });
   
@@ -96,7 +96,7 @@ export default function Search({buses}) {
     
 }
           export async function getStaticProps(){                     
-            const response = await fetch('http://10.0.247.202/all-bus-info')
+            const response = await fetch('http://travelephant-backend-service/all-bus-info')
                const data = await response.json()
                return {
                    props: {
@@ -114,9 +114,9 @@ export default function Search({buses}) {
              const totime = document.querySelector('#departureTime').value
              let endpoint = ''; 
              if(destination && departure) 
-               endpoint = `http://10.0.247.202/sepcific-bus-info?Departure=${departure}&Destination=${destination}&fromTime=${fromtime}&toTime=${totime}`;
+               endpoint = `http://travelephant-backend-service/sepcific-bus-info?Departure=${departure}&Destination=${destination}&fromTime=${fromtime}&toTime=${totime}`;
              else
-               endpoint = 'http://10.0.247.202/all-bus-info';
+               endpoint = 'http://travelephant-backend-service/all-bus-info';
              fetch(endpoint)
              .then(res => res.json())
              .then((data) => {

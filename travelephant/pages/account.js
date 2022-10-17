@@ -17,7 +17,7 @@ export default function Account(tickets) {
     (
         async () => {
             try {
-                const response = await fetch('http://10.0.247.202/user', {
+                const response = await fetch('http://travelephant-backend-service/user', {
                     credentials: 'include',
                 });
 
@@ -79,7 +79,7 @@ export default function Account(tickets) {
     if (!username){
       return;
     }
-    endpoint = `http://10.0.247.202/get-tickets?Username=${username}`;
+    endpoint = `http://travelephant-backend-service/get-tickets?Username=${username}`;
     fetch(endpoint)
     .then(res => res.json())
     .then((data) => {
@@ -112,7 +112,7 @@ function renderTickets(data){
 }
 
 export async function getStaticProps(){                     
-  const response = await fetch('http://10.0.247.202/get-all-tickets')
+  const response = await fetch('http://travelephant-backend-service/get-all-tickets')
      const data = await response.json()
      return {
          props: {
