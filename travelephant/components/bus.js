@@ -10,7 +10,7 @@ useEffect(() => {
   (
       async () => {
           try {
-              const response = await fetch('http://20.126.228.220/user', {
+              const response = await fetch('http://10.0.247.202/user', {
                   credentials: 'include',
               });
 
@@ -30,7 +30,7 @@ async function reserveticket(e){
     await router.push('/login');
   }
   else{
-  let url=`http://20.126.228.220t/book-ticket?UserID=${userId}&Departure=${departure}&DepartureTime=${departureTime}`;
+  let url=`http://10.0.247.202t/book-ticket?UserID=${userId}&Departure=${departure}&DepartureTime=${departureTime}`;
   const endpoint=url;
   const options={
     method:'POST',

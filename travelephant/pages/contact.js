@@ -11,7 +11,7 @@ export default function Contact() {
     (
         async () => {
             try {
-                const response = await fetch('http://20.126.228.220/user', {
+                const response = await fetch('http://10.0.247.202/user', {
                     credentials: 'include',
                 });
 
