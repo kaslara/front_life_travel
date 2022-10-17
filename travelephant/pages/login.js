@@ -14,7 +14,7 @@ export default function Login() {
 
   const submit = async (e) => {
     e.preventDefault();
-    const response= await fetch('http://travelephant-backend-service/login', {
+    const response= await fetch('http://20.103.33.25/login', {
         method: 'POST',
         body: JSON.stringify({
           username,

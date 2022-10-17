@@ -20,7 +20,7 @@ export default function Register() {
   const submit = async (e: SyntheticEvent) => {
     e.preventDefault();
 
-    await fetch('http://travelephant-backend-service/add-user', {
+    await fetch('http://20.103.33.25/add-user', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         credentials: 'include',

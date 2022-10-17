@@ -21,7 +21,7 @@ export default function Search({buses}) {
       (
           async () => {
               try {
-                  const response = await fetch('http://travelephant-backend-service/user', {
+                  const response = await fetch('http://20.103.33.25/user', {
                       credentials: 'include',
                   });
   
@@ -96,7 +96,7 @@ export default function Search({buses}) {
     
 }
           export async function getStaticProps(){                     
-            const response = await fetch('http://travelephant-backend-service/all-bus-info')
+            const response = await fetch('http://20.103.33.25/all-bus-info')
                const data = await response.json()
                return {
                    props: {
@@ -114,9 +114,9 @@ export default function Search({buses}) {
              const totime = document.querySelector('#departureTime').value
              let endpoint = ''; 
              if(destination && departure) 
-               endpoint = `http://travelephant-backend-service/sepcific-bus-info?Departure=${departure}&Destination=${destination}&fromTime=${fromtime}&toTime=${totime}`;
+               endpoint = `http://20.103.33.25/sepcific-bus-info?Departure=${departure}&Destination=${destination}&fromTime=${fromtime}&toTime=${totime}`;
              else
-               endpoint = 'http://travelephant-backend-service/all-bus-info';
+               endpoint = 'http://20.103.33.25/all-bus-info';
              fetch(endpoint)
              .then(res => res.json())
              .then((data) => {
@@ -148,7 +148,7 @@ export default function Search({buses}) {
                             reserveticket();
 
                             async function reserveticket(){
-                                const response = await fetch('http://travelephant-backend-service/user', {
+                                const response = await fetch('http://20.103.33.25/user', {
                                     credentials: 'include',
                                 });
                                 const content = await response.json();
@@ -156,7 +156,7 @@ export default function Search({buses}) {
                                     await router.push('/login');
                                 }
                                 else{                              
-                                let url=`http://travelephant-backend-service/book-ticket?UserID=${content.userId}&Departure=${busline.departure}&DepartureTime=${busline.departureTime}`;
+                                let url=`http://20.103.33.25/book-ticket?UserID=${content.userId}&Departure=${busline.departure}&DepartureTime=${busline.departureTime}`;
                                 const endpoint=url;
                                 const options={
                                   method:'POST',

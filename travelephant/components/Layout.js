@@ -13,7 +13,7 @@ const Layout = (props) => {
     const router = useRouter();
 
     const logout = async () => {
-        await fetch('http://travelephant-backend-service/logout', {
+        await fetch('http://20.103.33.25/logout', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             credentials: 'include',
