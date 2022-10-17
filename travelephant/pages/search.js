@@ -21,7 +21,7 @@ export default function Search({buses}) {
       (
           async () => {
               try {
-                  const response = await fetch('http://10.0.247.202/user', {
+                  const response = await fetch('http://travelephant-backend-service/user', {
                       credentials: 'include',
                   });
   
@@ -96,7 +96,7 @@ export default function Search({buses}) {
     
 }
           export async function getStaticProps(){                     
-            const response = await fetch('http://10.0.247.202/all-bus-info')
+            const response = await fetch('http://travelephant-backend-service/all-bus-info')
                const data = await response.json()
                return {
                    props: {
@@ -114,9 +114,9 @@ export default function Search({buses}) {
              const totime = document.querySelector('#departureTime').value
              let endpoint = ''; 
              if(destination && departure) 
-               endpoint = `http://10.0.247.202/sepcific-bus-info?Departure=${departure}&Destination=${destination}&fromTime=${fromtime}&toTime=${totime}`;
+               endpoint = `http://travelephant-backend-service/sepcific-bus-info?Departure=${departure}&Destination=${destination}&fromTime=${fromtime}&toTime=${totime}`;
              else
-               endpoint = 'http://10.0.247.202/all-bus-info';
+               endpoint = 'http://travelephant-backend-service/all-bus-info';
              fetch(endpoint)
              .then(res => res.json())
              .then((data) => {
@@ -129,22 +129,49 @@ export default function Search({buses}) {
                    document.querySelector("#bus-lines").innerHTML = "";
                    data.forEach(busline => {
                        var node = document.createElement('div');
+                       var but = document.createElement('button');
                        node.innerHTML = `
                            <a class=" block m-2 p-6 max-w-full bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Bus Company: ${busline.name}</h5>
                            <p class="font-normal text-gray-700 dark:text-gray-400">From: ${busline.departure}, Time: ${busline.departureTime}</p>
-                           <p class="font-normal text-gray-700 dark:text-gray-400">To: ${busline.destination}, ${busline.arrivalTime}</p>
+                           <p class="font-normal text-gray-700 dark:text-gray-400">To: ${busline.destination}, Time: ${busline.arrivalTime}</p>
                            <p class="font-normal text-gray-700 dark:text-gray-400">Price: ${busline.price}</p>
-                           <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">Rezervo</button>
                            </a>`
-                       document.querySelector("#bus-lines").appendChild(node)
+                        but.innerHTML = `
+                        <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">Rezervo</button>`
+                        
+                        
+                       document.querySelector("#bus-lines").appendChild(node);
+                       document.querySelector("#bus-lines").appendChild(but);
+
+                       but.onclick = function(){
+                            reserveticket();
+
+                            async function reserveticket(){
+                                const response = await fetch('http://travelephant-backend-service/user', {
+                                    credentials: 'include',
+                                });
+                                const content = await response.json();
+                                if(content.length <= 0){
+                                    await router.push('/login');
+                                }
+                                else{                              
+                                let url=`http://travelephant-backend-service/book-ticket?UserID=${content.userId}&Departure=${busline.departure}&DepartureTime=${busline.departureTime}`;
+                                const endpoint=url;
+                                const options={
+                                  method:'POST',
+                                  headers: {'Content-Type': 'application/json'},
+                                  credentials: 'include',
+                                
+                                }
+                                const response=await fetch(endpoint,options);
+                                }
+                              }
+                       }
+
                    });
                }
                else {
                    document.querySelector("#bus-lines").innerHTML = "There are no bus lines!";
                }
            }
-       
-
-
-     

@@ -10,7 +10,7 @@ useEffect(() => {
   (
       async () => {
           try {
-              const response = await fetch('http://10.0.247.202/user', {
+              const response = await fetch('http://travelephant-backend-service/user', {
                   credentials: 'include',
               });
 

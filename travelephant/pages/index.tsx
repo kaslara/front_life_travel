@@ -10,7 +10,7 @@ export default function Home({buses}){
     (
         async () => {
             try {
-                const response = await fetch('http://10.0.247.202/user', {
+                const response = await fetch('http://travelephant-backend-service/user', {
                     credentials: 'include',
                 });
 
@@ -39,7 +39,6 @@ export default function Home({buses}){
                 what sort of things I post here. Find best bus lines.
               </p>
               <div className="flex justify-center lg:justify-start mt-6">
-                <button className="md:mt-0 mt-2 md:mr-0 mr-2 bg-indigo-500 px-5 py-3 rounded-xl text-sm text-white hover:text-white shadow-xl hover:shadow-xl hover:shadow-indigo-300/80 shadow-indigo-400/40 hover:bg-indigo-600"><Link href="/contact"><a>About me</a></Link></button> 
                 <button className="md:mt-0 mt-2 ml-2 md:mr-0 mr-2 bg-indigo-500 px-5 py-3 rounded-xl text-sm text-white hover:text-white shadow-xl hover:shadow-xl hover:shadow-indigo-300/80 shadow-indigo-400/40 hover:bg-indigo-600"><Link href="/search"><a>Search buses</a></Link></button> 
               </div>
             </div>

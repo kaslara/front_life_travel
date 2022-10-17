@@ -3,6 +3,8 @@ import {useEffect, useState} from "react";
 import Image from "next/image";
 import { Formik, Field, Form } from 'formik';
 
+
+
 export default function Account(tickets) {
   const [auth, setAuth] = useState(false);
   const[username,setUsername]=useState('');
@@ -17,20 +19,17 @@ export default function Account(tickets) {
     (
         async () => {
             try {
-                const response = await fetch('http://10.0.247.202/user', {
+                const response = await fetch('http://travelephant-backend-service/user', {
                     credentials: 'include',
                 });
 
                 const content = await response.json();
-                console.log("ID");
                 setUsername(content.username);
                 setName(content.name);
                 setUserId(content.userId);
                 setAddress(content.address);
                 setSurname(content.surname);
                 setUserId(content.userID);
-                console.log(userId);
-                console.log({userId});
                 handleOnSubmitSearch();
                 
                 setAuth(true);
@@ -79,7 +78,8 @@ export default function Account(tickets) {
     if (!username){
       return;
     }
-    endpoint = `http://10.0.247.202/get-tickets?Username=${username}`;
+
+    endpoint = `http://travelephant-backend-service/get-tickets?Username=${username}`;
     fetch(endpoint)
     .then(res => res.json())
     .then((data) => {
@@ -88,7 +88,6 @@ export default function Account(tickets) {
   }
 
 }
-
 
 function renderTickets(data){
     if(data && data.length > 0) {
@@ -99,11 +98,33 @@ function renderTickets(data){
                 <a class=" block m-2 p-6 max-w-full bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <p class="font-normal text-gray-700 dark:text-gray-400">From: ${ticket.departure}</p>
                 <p class="font-normal text-gray-700 dark:text-gray-400">To: ${ticket.destination}</p>
-                <p class="font-normal text-gray-700 dark:text-gray-400">Price: ${ticket.name}</p>
-                <p class="font-normal text-gray-700 dark:text-gray-400">Price: ${ticket.surname}</p>
-                <p class="font-normal text-gray-700 dark:text-gray-400">Price: ${ticket.active}</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">Name: ${ticket.name}</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">Surname: ${ticket.surname}</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">Status: ${ticket.active}</p>
                 </a>`
+            var but = document.createElement('button'); 
+            but.innerHTML = `
+            <button className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">Cancel ticket</button>`
+                but.onclick = function(){
+                  cancelticket()
+                }
             document.querySelector("#bus-lines").appendChild(node)
+            document.querySelector("#bus-lines").appendChild(but)
+
+            async function cancelticket(){
+
+              const content = await fetch('http://travelephant-backend-service/user', {
+                            credentials: 'include',
+                            });
+                            const response = await content.json();
+                            
+              
+                let endpoint = `http://travelephant-backend-service/cancel-ticket?TickedId=${ticket.id}`;
+                fetch(endpoint, {
+                  method: 'PUT'
+                });
+                
+              }
         });
     }
     else {
@@ -112,11 +133,11 @@ function renderTickets(data){
 }
 
 export async function getStaticProps(){                     
-  const response = await fetch('http://10.0.247.202/get-all-tickets')
+  const response = await fetch('http://travelephant-backend-service/get-all-tickets')
      const data = await response.json()
      return {
          props: {
              tick: data,
          },
      }
-    }
+}
